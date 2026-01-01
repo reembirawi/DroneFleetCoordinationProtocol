@@ -1,6 +1,10 @@
 package org.example.util;
 
-public class GeoLocation {
+import java.io.Serializable;
+
+public class GeoLocation  implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private double latitude;
     private double longitude;
 

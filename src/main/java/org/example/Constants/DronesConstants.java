@@ -1,6 +1,6 @@
 package org.example.Constants;
 
-public class DronsConstants {
+public class DronesConstants {
     public static final String REGISTER = "REGISTER";
     public static final String REQUEST_TASK = "REQUEST_TASK";
     public static final String SUBMIT_RESULT =  "SUBMIT_RESULT";
@@ -9,4 +9,5 @@ public class DronsConstants {
     public static final String LOST =  "LOST";
     public static final String AVAILABLE =  " AVAILABLE";
     public static final String OCCUPIED =  " OCCUPIED";
+    public static final String OK = "OK";
 }

@@ -2,7 +2,7 @@ package org.example.util;
 
 import java.io.*;
 
-public class ObjectToByte {
+public class ObjectConverter {
 
     public Object byteToObject (byte[] input) throws IOException, ClassNotFoundException {
         ByteArrayInputStream inputByte = new ByteArrayInputStream(input);

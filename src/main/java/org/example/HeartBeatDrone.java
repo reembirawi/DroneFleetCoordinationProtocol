@@ -1,4 +1,5 @@
-package main.java.org.example;
+package org.example;
 
-public class HeartBeatDrone {
+public class HeartBeatDrone extends Thread{
+
 }
