@@ -1,4 +1,4 @@
-package main.java.org.example.Constants;
+package org.example.Constants;
 
 public class DronsConstants {
     public static final String REGISTER = "REGISTER";
@@ -7,4 +7,6 @@ public class DronsConstants {
     public static final String HEARTBEAT =  "HEARTBEAT";
     public static final String ALIVE =  "ALIVE";
     public static final String LOST =  "LOST";
+    public static final String AVAILABLE =  " AVAILABLE";
+    public static final String OCCUPIED =  " OCCUPIED";
 }
