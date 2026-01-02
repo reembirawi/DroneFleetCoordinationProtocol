@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 package org.example.service;
 
 import org.example.MissionLeaderServer;
+=======
+package org.example;
+
+>>>>>>> 5d29eb0 (feat(drone): Implement DroneManager thread to handle drone heartbeats and tasks)
 import org.example.config.AppConfig;
 import org.example.config.ConfigKeys;
 import org.example.util.Data;
@@ -132,7 +137,8 @@ public class DroneManager extends Thread {
                 if(status.equals(PENDING)) {
                     data = new Data(TASK, taskId);
                     taskStatus.put(taskId, IN_PROGRESS);
-                    logger.info("Drone {} got assigned to task {} and set task {} to {}", droneId, taskId, taskId, IN_PROGRESS);                    break;
+                    logger.info("Drone {} got assigned to task {} and set task {} to {}", droneId, taskId, taskId, IN_PROGRESS);
+                    break;
                 }
             }
 
