@@ -4,7 +4,9 @@ import org.example.config.AppConfig;
 import org.example.config.ConfigKeys;
 import org.example.service.DroneManager;
 import org.example.util.Data;
+import org.example.util.GeoLocation;
 import org.example.util.ObjectConverter;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +25,7 @@ public class MissionLeaderServer extends Thread {
     private ConcurrentHashMap<String, String> droneState;
     private ConcurrentHashMap<String, String> taskStatus;
     private static final Logger logger = LoggerFactory.getLogger(MissionLeaderServer.class);
-    private final ConcurrentHashMap<String, DroneManager> droneThreads = new ConcurrentHashMap<>();
+    private final static ConcurrentHashMap<String, DroneManager> droneThreads = new ConcurrentHashMap<>();
 
     MissionLeaderServer(
             DatagramSocket socket,
@@ -60,7 +62,7 @@ public class MissionLeaderServer extends Thread {
                 logger.error(e.getMessage());
                 break;
             } catch (IOException e) {
-                logger.error("Error processing packet", e);
+                logger.error("Error while routing the packet", e);
                 break;
             }
         }
@@ -70,12 +72,8 @@ public class MissionLeaderServer extends Thread {
         logger.info("Drone {} send a {} command", id, command);
     }
 
-    private String getDroneId(String content) {
-        return content.split("-")[0];
-    }
-
-    private void routeRegister(Data data, InetSocketAddress clientAddress) {
-        String droneId = data.getContent();
+    private void routeRegister(Data data, InetSocketAddress clientAddress) throws IOException{
+        String droneId = data.getId();
         if (droneId == null || droneId.length() != 10) {
             logger.error("Invalid droneId: {}", droneId);
             return;
@@ -84,8 +82,21 @@ public class MissionLeaderServer extends Thread {
         infoLogging(droneId, REGISTER);
 
         if (droneThreads.get(droneId) == null) {
-            DroneManager manager = new DroneManager(droneId, clientAddress, droneState, taskStatus);
+            DroneManager manager = new DroneManager(
+                    droneId,
+                    clientAddress,
+                    socket,
+                    droneState,
+                    taskStatus,
+                    this::unregisterDrone
+            );
             droneThreads.put(droneId, manager);
+            Data ack = new Data(OK);
+            byte []buffer = objectConverter.objectToBytes(ack);
+            DatagramPacket packet = new DatagramPacket(
+                    buffer, buffer.length, clientAddress.getAddress(), clientAddress.getPort()
+            );
+            socket.send(packet);
             manager.start();
         } else {
             logger.warn("Drone {} tried to register again", droneId);
@@ -93,7 +104,7 @@ public class MissionLeaderServer extends Thread {
     }
 
     private void routeRequestTask(Data data) {
-        String droneId = data.getContent();
+        String droneId = data.getId();
 
         DroneManager manager = droneThreads.get(droneId);
         if (manager == null) {
@@ -106,7 +117,7 @@ public class MissionLeaderServer extends Thread {
     }
 
     private void routeSubmitResult(Data data) {
-        String droneId = getDroneId(data.getContent());
+        String droneId = data.getId();
 
         DroneManager manager = droneThreads.get(droneId);
         if (manager == null) {
@@ -119,7 +130,7 @@ public class MissionLeaderServer extends Thread {
     }
 
     private void routeHeartbeat(Data data) {
-        String droneId = getDroneId(data.getContent());
+        String droneId = data.getId();
 
         DroneManager manager = droneThreads.get(droneId);
         if (manager == null) {
@@ -131,7 +142,7 @@ public class MissionLeaderServer extends Thread {
         manager.sendHeartBeatMessage(data);
     }
 
-    private void route(@org.jetbrains.annotations.NotNull Data data, InetSocketAddress clientAddress) {
+    private void route(@NotNull Data data, InetSocketAddress clientAddress) throws IOException{
         switch (data.getType()) {
             case REGISTER -> routeRegister(data, clientAddress);
             case REQUEST_TASK -> routeRequestTask(data);
@@ -139,5 +150,9 @@ public class MissionLeaderServer extends Thread {
             case HEARTBEAT -> routeHeartbeat(data);
             default -> logger.warn("Unknown command {}", data.getType());
         }
+    }
+    public void unregisterDrone(String droneId) {
+        droneThreads.remove(droneId);
+        logger.info("Drone {} unregistered and marked as LOST", droneId);
     }
 }
