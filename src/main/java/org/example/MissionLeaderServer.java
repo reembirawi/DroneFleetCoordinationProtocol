@@ -94,7 +94,7 @@ public class MissionLeaderServer extends Thread {
         }
 
         infoLogging(id, REQUEST_TASK);
-        manager.sendMessage(data);
+        manager.sendTaskMessage(data);
     }
 
     private void routeSubmitResult(Data data) {
@@ -107,7 +107,7 @@ public class MissionLeaderServer extends Thread {
         }
 
         infoLogging(id, SUBMIT_RESULT);
-        manager.sendMessage(data);
+        manager.sendTaskMessage(data);
     }
 
     private void routeHeartbeat(Data data) {
@@ -120,7 +120,7 @@ public class MissionLeaderServer extends Thread {
         }
 
         infoLogging(id, HEARTBEAT);
-        manager.sendMessage(data);
+        manager.sendHeartBeatMessage(data);
     }
 
 
