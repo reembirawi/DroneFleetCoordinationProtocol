@@ -1,11 +1,5 @@
-<<<<<<< HEAD
-package org.example.service;
-
-import org.example.MissionLeaderServer;
-=======
 package org.example;
 
->>>>>>> 5d29eb0 (feat(drone): Implement DroneManager thread to handle drone heartbeats and tasks)
 import org.example.config.AppConfig;
 import org.example.config.ConfigKeys;
 import org.example.util.Data;
@@ -51,7 +45,7 @@ public class DroneManager extends Thread {
             String droneId,
             InetSocketAddress clientAddress,
             DatagramSocket socket,
-            ConcurrentHashMap<String, String>droneState,
+            ConcurrentHashMap<String, String> droneState,
             ConcurrentHashMap<String, String> taskStatus,
             Consumer<String> unregisterCallback
     ) {
