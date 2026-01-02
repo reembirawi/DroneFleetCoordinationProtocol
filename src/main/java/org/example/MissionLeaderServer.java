@@ -27,10 +27,10 @@ public class MissionLeaderServer extends Thread {
 
     MissionLeaderServer(
             DatagramSocket socket,
-            ConcurrentHashMap<String, String>droneState,
-            ConcurrentHashMap<String, String>taskStatus
+            ConcurrentHashMap<String, String> droneState,
+            ConcurrentHashMap<String, String> taskStatus
     ) {
-        this.socket  = socket;
+        this.socket = socket;
         this.droneState = droneState;
         this.taskStatus = taskStatus;
     }
@@ -40,23 +40,23 @@ public class MissionLeaderServer extends Thread {
         final int SERVER_PORT = AppConfig.getInt(ConfigKeys.SERVER_PORT);
         logger.info("Mission Leader Server started on port {}", SERVER_PORT);
 
-        while(!socket.isClosed()){
+        while (!socket.isClosed()) {
             try {
                 byte[] buffer = new byte[100];
-
                 DatagramPacket receivePacket = new DatagramPacket(buffer, buffer.length);
-
                 socket.receive(receivePacket);
+
                 InetSocketAddress clientAddress = new InetSocketAddress(
                         receivePacket.getAddress(), receivePacket.getPort()
                 );
 
                 Data data = (Data) objectConverter.byteToObject(receivePacket.getData());
                 route(data, clientAddress);
-            } catch(SocketException e) {
+
+            } catch (SocketException e) {
                 logger.info("Socket closed, stopping Mission Leader");
                 break;
-            } catch(ClassNotFoundException e) {
+            } catch (ClassNotFoundException e) {
                 logger.error(e.getMessage());
                 break;
             } catch (IOException e) {
@@ -64,7 +64,6 @@ public class MissionLeaderServer extends Thread {
                 break;
             }
         }
-
     }
 
     private void infoLogging(String id, String command) {
@@ -74,55 +73,63 @@ public class MissionLeaderServer extends Thread {
     private String getDroneId(String content) {
         return content.split("-")[0];
     }
+
     private void routeRegister(Data data, InetSocketAddress clientAddress) {
-        String id = data.getContent();
-        infoLogging(id, REGISTER);
-        if(droneThreads.get(id) == null) {
-            droneThreads.put(id, new DroneManager(id, clientAddress, droneState, taskStatus));
+        String droneId = data.getContent();
+        if (droneId == null || droneId.length() != 10) {
+            logger.error("Invalid droneId: {}", droneId);
+            return;
+        }
+
+        infoLogging(droneId, REGISTER);
+
+        if (droneThreads.get(droneId) == null) {
+            DroneManager manager = new DroneManager(droneId, clientAddress, droneState, taskStatus);
+            droneThreads.put(droneId, manager);
+            manager.start();
         } else {
-            logger.warn("Drone {} try to register again", id);
+            logger.warn("Drone {} tried to register again", droneId);
         }
     }
 
     private void routeRequestTask(Data data) {
-        String id = data.getContent();
+        String droneId = data.getContent();
 
-        DroneManager manager = droneThreads.get(id);
+        DroneManager manager = droneThreads.get(droneId);
         if (manager == null) {
-            logger.warn("Request Task from unregistered drone {}", id);
+            logger.warn("Request Task from unregistered drone {}", droneId);
             return;
         }
 
-        infoLogging(id, REQUEST_TASK);
+        infoLogging(droneId, REQUEST_TASK);
         manager.sendTaskMessage(data);
     }
 
     private void routeSubmitResult(Data data) {
-        String id = getDroneId(data.getContent());
+        String droneId = getDroneId(data.getContent());
 
-        DroneManager manager = droneThreads.get(id);
+        DroneManager manager = droneThreads.get(droneId);
         if (manager == null) {
-            logger.warn("Result from unregistered drone {}", id);
+            logger.warn("Result from unregistered drone {}", droneId);
             return;
         }
 
-        infoLogging(id, SUBMIT_RESULT);
+        infoLogging(droneId, SUBMIT_RESULT);
         manager.sendTaskMessage(data);
     }
 
     private void routeHeartbeat(Data data) {
-        String id = getDroneId(data.getContent());
+        String droneId = getDroneId(data.getContent());
 
-        DroneManager manager = droneThreads.get(id);
+        DroneManager manager = droneThreads.get(droneId);
         if (manager == null) {
-            logger.warn("Heartbeat from unregistered drone {}", id);
+            logger.warn("Heartbeat from unregistered drone {}", droneId);
             return;
         }
 
-        infoLogging(id, HEARTBEAT);
+        infoLogging(droneId, HEARTBEAT);
         manager.sendHeartBeatMessage(data);
     }
-
 
     private void route(@org.jetbrains.annotations.NotNull Data data, InetSocketAddress clientAddress) {
         switch (data.getType()) {
