@@ -1,6 +1,5 @@
 package org.example;
 
-import org.example.MissionLeaderServer;
 import org.example.config.AppConfig;
 import org.example.config.ConfigKeys;
 import org.example.util.Data;
@@ -46,7 +45,7 @@ public class DroneManager extends Thread {
             String droneId,
             InetSocketAddress clientAddress,
             DatagramSocket socket,
-            ConcurrentHashMap<String, String>droneState,
+            ConcurrentHashMap<String, String> droneState,
             ConcurrentHashMap<String, String> taskStatus,
             Consumer<String> unregisterCallback
     ) {
@@ -132,7 +131,8 @@ public class DroneManager extends Thread {
                 if(status.equals(PENDING)) {
                     data = new Data(TASK, taskId);
                     taskStatus.put(taskId, IN_PROGRESS);
-                    logger.info("Drone {} got assigned to task {} and set task {} to {}", droneId, taskId, taskId, IN_PROGRESS);                    break;
+                    logger.info("Drone {} got assigned to task {} and set task {} to {}", droneId, taskId, taskId, IN_PROGRESS);
+                    break;
                 }
             }
 
