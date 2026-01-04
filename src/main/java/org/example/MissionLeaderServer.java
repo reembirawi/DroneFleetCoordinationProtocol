@@ -2,7 +2,7 @@ package org.example;
 
 import org.example.config.AppConfig;
 import org.example.config.ConfigKeys;
-import org.example.service.DroneManager;
+import org.example.DroneManager;
 import org.example.util.Data;
 import org.example.util.GeoLocation;
 import org.example.util.ObjectConverter;

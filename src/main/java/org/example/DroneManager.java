@@ -1,4 +1,4 @@
-package org.example.service;
+package org.example;
 
 import org.example.MissionLeaderServer;
 import org.example.config.AppConfig;

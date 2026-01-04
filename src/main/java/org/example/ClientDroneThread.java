@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 
 import org.example.util.GeoLocation;
 import org.example.util.ObjectConverter;
+import org.example.Main;
+
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -17,6 +19,7 @@ import java.util.Random;
 
 import static java.lang.Math.abs;
 import static org.example.Constants.DronesConstants.*;
+import static org.example.Main.tasks;
 import static org.example.config.AppConfig.getInt;
 import static org.example.config.ConfigKeys.*;
 
@@ -28,36 +31,38 @@ public class ClientDroneThread extends Thread {
 
     private final String id;
     private final Integer speed = getInt(DRONE_SPEED);
-    private final Integer maxServivors = getInt(MAX_NUMBER_OF_SURVIVORS);
+    private final Integer maxSurvivors = getInt(MAX_NUMBER_OF_SURVIVORS);
     private final int destinationPort;
     private final InetAddress destination;
     private final DatagramSocket skt;
-    private GeoLocation curruentLocation;
+    private GeoLocation currentLocation;
     private Data sendData;
     private Data recivedData;
     private String status = AVAILABLE;
 
+
     public ClientDroneThread(String Id, int localPort, String destination,
-                             int destinationPort, GeoLocation curruentLocation) throws IOException {
+                             int destinationPort, GeoLocation currentLocation, DatagramSocket skt)throws IOException {
         this.destinationPort = destinationPort;
         this.destination = InetAddress.getByName(destination);
         this.id = Id;
-        this.skt = new DatagramSocket(localPort);
-        this.curruentLocation = curruentLocation;
+        this.skt = skt;
+        this.currentLocation = currentLocation;
     }
 
     public void run() {
         try {
 
-            DatagramPacket sendPacket;
+            HeartBeatDrone heartBeat = new HeartBeatDrone(id, destinationPort,destination,skt);
+            byte[] reply = new byte[1024];
 
+            DatagramPacket sendPacket;
             //Drone register on the server (leader mission)
             sendData = new Data(REGISTER,id);
             sendData(sendData,destination,destinationPort);
             logger.info("Drone {} try to register in {}", id, destination);
 
             //Receive ok
-            byte[] reply = new byte[100];
             DatagramPacket receiveData = new DatagramPacket(reply, reply.length);
             skt.receive(receiveData);
             String receivedReplay = new String(receiveData.getData(),receiveData.getOffset(),receiveData.getLength());
@@ -69,24 +74,22 @@ public class ClientDroneThread extends Thread {
                 sendData(sendData, destination, destinationPort);
 
                 //receive GeoLocation
-                byte[] data = new byte[1024];
-                DatagramPacket receivePacket = new DatagramPacket(data, data.length);
+                DatagramPacket receivePacket = new DatagramPacket(reply, reply.length);
                 skt.receive(receivePacket);
 
-                //in case we cant now the real size
-                byte[] receivedData = java.util.Arrays.copyOfRange(
-                        data, 0, receivePacket.getLength()
-                );
+                Data processData = (Data) objectConverter.byteToObject(receivePacket.getData());
 
+                switch (processData.getType()){
+                    case SUBMIT_RESULT -> {
+                        status = OCCUPIED;
+                        processGeoLocation(processData);
+                    }
+                    case NO_TASK_AVAILABLE -> {
+                        Thread.sleep(100);
+                        continue;
+                    }
+                }
 
-                Object receivedObject = objectConverter.byteToObject(receivedData);
-                GeoLocation geoLocationReply = (GeoLocation) receivedObject;
-
-                int numberOfSurvivors = scanningArea(geoLocationReply);
-
-                //send request
-                sendData = new Data(SUBMIT_RESULT,id+":"+numberOfSurvivors);
-                sendData(sendData,destination, destinationPort);
                 status = AVAILABLE;
             }
 
@@ -102,8 +105,8 @@ public class ClientDroneThread extends Thread {
     //This function just to simulate scanning time
     private int scanningArea(GeoLocation destinationLocation) throws InterruptedException {
 
-        double currentLatitude = curruentLocation.getLatitude();
-        double currentLongitude = curruentLocation.getLongitude();
+        double currentLatitude = currentLocation.getLatitude();
+        double currentLongitude = currentLocation.getLongitude();
         double destinationLatitude = destinationLocation.getLatitude();
         double destinationLongitude = destinationLocation.getLongitude();
         long area = (long) (abs(destinationLatitude -  currentLatitude) * abs(destinationLongitude - currentLongitude));
@@ -111,14 +114,14 @@ public class ClientDroneThread extends Thread {
 
         logger.info("Start scanning {} , {}  total wait time : {}",destinationLatitude, destinationLongitude, timeToScan);
         Thread.sleep(timeToScan);
-        curruentLocation = destinationLocation;
+        currentLocation = destinationLocation;
         return numberOfSurvivors();
 
     }
 
     private int numberOfSurvivors (){
         Random r= new Random();
-        return r.nextInt(maxServivors) + 1;
+        return r.nextInt(maxSurvivors) + 1;
     }
 
     private void sendData(Data sendData, InetAddress destination, int port){
@@ -132,7 +135,14 @@ public class ClientDroneThread extends Thread {
         }
     }
 
-    //private Data reciveData(){}
+    private void processGeoLocation(Data processData) throws InterruptedException {
+
+        String taskId = processData.getId();
+        GeoLocation geoLocationReply = tasks.get(taskId);
+        String numberOfSurvivors = String.valueOf(scanningArea(geoLocationReply));
+
+        sendData = new Data(SUBMIT_RESULT,taskId,numberOfSurvivors);
+        sendData(sendData,destination, destinationPort);
+    }
+
 }
-
-
