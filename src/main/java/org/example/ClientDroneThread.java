@@ -55,8 +55,6 @@ public class ClientDroneThread extends Thread {
     public void run() {
         try {
 
-            HeartBeatDrone heartBeat = new HeartBeatDrone(id, destinationPort,destination,skt);
-            heartBeat.start();
             byte[] reply = new byte[1024];
 
             //Drone register on the server (leader mission)
@@ -69,9 +67,10 @@ public class ClientDroneThread extends Thread {
             skt.receive(receiveData);
             logger.info("Drone {} RECIVE OK {}", id, destination);
             String receivedReplay = new String(receiveData.getData(),receiveData.getOffset(),receiveData.getLength());
+            HeartBeatDrone heartBeat = new HeartBeatDrone(id, destinationPort,destination,skt);
+            heartBeat.start();
 
-
-            while(status.equals(AVAILABLE)){
+            while(receivedReplay.contains(OK)&&status.equals(AVAILABLE)){
                 //send request
                 sendData = new Data(REQUEST_TASK,id);
                 sendPacket.sendData(sendData, destination, destinationPort,skt);
@@ -113,7 +112,7 @@ public class ClientDroneThread extends Thread {
         long timeToScan = distance / speed * 1000;
 
         logger.info("Start scanning {} , {}  total wait time : {}",destinationLatitude, destinationLongitude, timeToScan);
-        Thread.sleep(timeToScan);
+        Thread.sleep(100000);
         currentLocation = destinationLocation;
         return numberOfSurvivors();
 
@@ -132,7 +131,7 @@ public class ClientDroneThread extends Thread {
         String numberOfSurvivors = String.valueOf(scanningArea(geoLocationReply));
 
         logger.info("drone is trying to submit {}",taskId);
-        sendData = new Data(SUBMIT_RESULT,taskId,numberOfSurvivors);
+        sendData = new Data(SUBMIT_RESULT,id,numberOfSurvivors,taskId);
         sendPacket.sendData(sendData,destination, destinationPort,skt);
     }
 

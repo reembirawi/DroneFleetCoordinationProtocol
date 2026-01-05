@@ -39,7 +39,7 @@ public class HeartBeatDrone extends Thread{
 
     public void run() {
             while(true){
-                String heartBeatTime = heartBeatTime = LocalTime.now().format(TIME_FORMATTER);
+                String heartBeatTime = LocalTime.now().format(TIME_FORMATTER);
                 sendData = new Data(HEARTBEAT,id,heartBeatTime);
                 sendData(sendData,destination,destinationPort);
                 logger.info("HeartBeat from {} to register {} in {} ", id, destination,heartBeatTime);

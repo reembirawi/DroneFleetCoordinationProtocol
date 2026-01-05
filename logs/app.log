@@ -29478,3 +29478,263 @@ java.io.EOFException
 2026-01-05 17:25:59 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
 2026-01-05 17:25:59 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:25:59 
 2026-01-05 17:25:59 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:33:17 [Thread-0] INFO  org.example.MissionLeaderServer - Mission Leader Server started on port 4444
+2026-01-05 17:33:27 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:33:27 
+2026-01-05 17:33:27 [main] INFO  org.example.ClientDroneThread - Drone DR-10 try to register in localhost/127.0.0.1
+2026-01-05 17:33:27 [Thread-0] WARN  org.example.MissionLeaderServer - Heartbeat from unregistered drone DR-10
+2026-01-05 17:33:27 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a REGISTER command
+2026-01-05 17:33:27 [main] INFO  org.example.ClientDroneThread - Drone DR-10 RECIVE OK localhost/127.0.0.1
+2026-01-05 17:33:27 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a REQUEST_TASK command
+2026-01-05 17:33:27 [Thread-1] INFO  org.example.DroneManager - Drone DR-10 got assigned to task TS-5 and set task TS-5 to IN_PROGRESS
+2026-01-05 17:33:27 [main] INFO  org.example.ClientDroneThread - Start scanning 31.9626 , 35.9119  total wait time : 0
+2026-01-05 17:33:27 [main] INFO  org.example.ClientDroneThread - drone is trying to submit TS-5
+2026-01-05 17:33:27 [Thread-0] WARN  org.example.MissionLeaderServer - Result from unregistered drone TS-5
+2026-01-05 17:33:27 [Thread-0] INFO  org.example.MissionLeaderServer - Drone TS-5 send a SUBMIT_RESULT command
+2026-01-05 17:33:32 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:33:32 
+2026-01-05 17:33:37 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:33:37 
+2026-01-05 17:33:42 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:33:42 
+2026-01-05 17:33:47 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:33:47 
+2026-01-05 17:33:52 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:33:52 
+2026-01-05 17:33:57 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:33:57 
+2026-01-05 17:34:02 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:34:02 
+2026-01-05 17:34:07 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:34:07 
+2026-01-05 17:34:12 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:34:12 
+2026-01-05 17:34:17 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:34:17 
+2026-01-05 17:34:22 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:34:22 
+2026-01-05 17:34:27 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:34:27 
+2026-01-05 17:34:32 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:34:32 
+2026-01-05 17:34:37 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:34:37 
+2026-01-05 17:34:42 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:34:42 
+2026-01-05 17:34:47 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:34:47 
+2026-01-05 17:34:52 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:34:52 
+2026-01-05 17:34:57 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:34:57 
+2026-01-05 17:35:02 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:35:02 
+2026-01-05 17:35:07 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:35:07 
+2026-01-05 17:35:12 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:35:12 
+2026-01-05 17:35:17 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:35:17 
+2026-01-05 17:35:22 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:35:22 
+2026-01-05 17:35:27 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:35:27 
+2026-01-05 17:35:32 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:35:32 
+2026-01-05 17:35:37 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:35:37 
+2026-01-05 17:35:42 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:35:42 
+2026-01-05 17:35:47 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:35:47 
+2026-01-05 17:35:52 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:35:52 
+2026-01-05 17:35:57 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:35:57 
+2026-01-05 17:39:10 [Thread-0] INFO  org.example.MissionLeaderServer - Mission Leader Server started on port 4444
+2026-01-05 17:39:34 [Thread-0] INFO  org.example.MissionLeaderServer - Mission Leader Server started on port 4444
+2026-01-05 17:39:45 [main] INFO  org.example.ClientDroneThread - Drone DR-10 try to register in localhost/127.0.0.1
+2026-01-05 17:39:45 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a REGISTER command
+2026-01-05 17:39:45 [main] INFO  org.example.ClientDroneThread - Drone DR-10 RECIVE OK localhost/127.0.0.1
+2026-01-05 17:39:45 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a REQUEST_TASK command
+2026-01-05 17:39:45 [Thread-1] INFO  org.example.DroneManager - Drone DR-10 got assigned to task TS-5 and set task TS-5 to IN_PROGRESS
+2026-01-05 17:39:45 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:39:45 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:39:45 
+2026-01-05 17:39:45 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:39:45 [main] INFO  org.example.ClientDroneThread - Start scanning 31.9626 , 35.9119  total wait time : 0
+2026-01-05 17:39:45 [main] INFO  org.example.ClientDroneThread - drone is trying to submit TS-5
+2026-01-05 17:39:45 [Thread-0] WARN  org.example.MissionLeaderServer - Result from unregistered drone TS-5
+2026-01-05 17:39:45 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a REQUEST_TASK command
+2026-01-05 17:39:45 [Thread-1] INFO  org.example.DroneManager - Drone DR-10 got assigned to task TS-4 and set task TS-4 to IN_PROGRESS
+2026-01-05 17:39:45 [main] INFO  org.example.ClientDroneThread - Start scanning 31.9626 , 35.9108  total wait time : 0
+2026-01-05 17:39:45 [main] INFO  org.example.ClientDroneThread - drone is trying to submit TS-4
+2026-01-05 17:39:45 [Thread-0] WARN  org.example.MissionLeaderServer - Result from unregistered drone TS-4
+2026-01-05 17:39:45 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a REQUEST_TASK command
+2026-01-05 17:39:45 [Thread-1] INFO  org.example.DroneManager - Drone DR-10 got assigned to task TS-3 and set task TS-3 to IN_PROGRESS
+2026-01-05 17:39:45 [main] INFO  org.example.ClientDroneThread - Start scanning 31.9626 , 35.9108  total wait time : 0
+2026-01-05 17:39:45 [main] INFO  org.example.ClientDroneThread - drone is trying to submit TS-3
+2026-01-05 17:39:45 [Thread-0] WARN  org.example.MissionLeaderServer - Result from unregistered drone TS-3
+2026-01-05 17:39:45 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a REQUEST_TASK command
+2026-01-05 17:39:45 [Thread-1] INFO  org.example.DroneManager - Drone DR-10 got assigned to task TS-2 and set task TS-2 to IN_PROGRESS
+2026-01-05 17:39:45 [main] INFO  org.example.ClientDroneThread - Start scanning 31.9626 , 35.91025  total wait time : 0
+2026-01-05 17:39:45 [main] INFO  org.example.ClientDroneThread - drone is trying to submit TS-2
+2026-01-05 17:39:45 [Thread-0] WARN  org.example.MissionLeaderServer - Result from unregistered drone TS-2
+2026-01-05 17:39:45 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a REQUEST_TASK command
+2026-01-05 17:39:45 [Thread-1] INFO  org.example.DroneManager - Drone DR-10 got assigned to task TS-1 and set task TS-1 to IN_PROGRESS
+2026-01-05 17:39:45 [main] INFO  org.example.ClientDroneThread - Start scanning 31.9626 , 35.9097  total wait time : 0
+2026-01-05 17:39:45 [main] INFO  org.example.ClientDroneThread - drone is trying to submit TS-1
+2026-01-05 17:39:45 [Thread-0] WARN  org.example.MissionLeaderServer - Result from unregistered drone TS-1
+2026-01-05 17:39:45 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a REQUEST_TASK command
+2026-01-05 17:39:45 [Thread-1] INFO  org.example.DroneManager - No pending tasks available for drone DR-10
+2026-01-05 17:39:50 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:39:50 
+2026-01-05 17:39:50 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:39:50 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:39:55 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:39:55 
+2026-01-05 17:39:55 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:39:55 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:40:00 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:40:00 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:40:00 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:40:00 
+2026-01-05 17:40:05 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:40:05 
+2026-01-05 17:40:05 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:40:05 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:40:10 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:40:10 
+2026-01-05 17:40:10 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:40:10 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:40:15 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:40:15 
+2026-01-05 17:40:15 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:40:15 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:40:20 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:40:20 
+2026-01-05 17:40:20 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:40:20 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:40:25 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:40:25 
+2026-01-05 17:40:25 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:40:25 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:40:30 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:40:30 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:40:30 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:40:30 
+2026-01-05 17:40:35 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:40:35 
+2026-01-05 17:40:35 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:40:35 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:40:40 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:40:40 
+2026-01-05 17:40:40 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:40:40 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:40:45 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:40:45 
+2026-01-05 17:40:45 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:40:45 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:40:50 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:40:50 
+2026-01-05 17:40:50 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:40:50 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:40:55 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:40:55 
+2026-01-05 17:40:55 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:40:55 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:41:00 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:41:00 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:41:00 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:41:00 
+2026-01-05 17:41:05 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:41:05 
+2026-01-05 17:41:05 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:41:05 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:41:10 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:41:10 
+2026-01-05 17:41:10 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:41:10 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:41:15 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:41:15 
+2026-01-05 17:41:15 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:41:15 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:41:20 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:41:20 
+2026-01-05 17:41:20 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:41:20 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:41:25 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a REQUEST_TASK command
+2026-01-05 17:41:25 [Thread-1] INFO  org.example.DroneManager - No pending tasks available for drone DR-10
+2026-01-05 17:41:25 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:41:25 
+2026-01-05 17:41:25 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:41:25 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:41:30 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:41:30 
+2026-01-05 17:41:30 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:41:30 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:41:35 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:41:35 
+2026-01-05 17:41:35 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:41:35 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:41:40 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:41:40 
+2026-01-05 17:41:40 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:41:40 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:41:45 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:41:45 
+2026-01-05 17:41:45 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:41:45 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:41:50 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:41:50 
+2026-01-05 17:41:50 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:41:50 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:41:55 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:41:55 
+2026-01-05 17:41:55 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:41:55 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:42:00 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:42:00 
+2026-01-05 17:42:00 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:42:00 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:42:05 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:42:05 
+2026-01-05 17:42:05 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:42:05 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:42:10 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:42:10 
+2026-01-05 17:42:10 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:42:10 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:42:15 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:42:15 
+2026-01-05 17:42:15 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:42:15 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:42:20 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:42:20 
+2026-01-05 17:42:20 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:42:20 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:42:25 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:42:25 
+2026-01-05 17:42:25 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:42:25 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:42:30 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:42:30 
+2026-01-05 17:42:30 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:42:30 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:42:35 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:42:35 
+2026-01-05 17:42:35 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:42:35 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:42:40 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:42:40 
+2026-01-05 17:42:40 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:42:40 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:42:45 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:42:45 
+2026-01-05 17:42:45 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:42:45 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:42:50 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:42:50 
+2026-01-05 17:42:50 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:42:50 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:42:55 [Thread-1] INFO  org.example.HeartBeatDrone - HeartBeat from DR-10 to register localhost/127.0.0.1 in 17:42:55 
+2026-01-05 17:42:55 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a HEARTBEAT command
+2026-01-05 17:42:55 [Thread-1] ERROR org.example.DroneManager - Error while receiving heartbeat message from drone: DR-10, error message: Index 1 out of bounds for length 1
+2026-01-05 17:43:06 [Thread-0] INFO  org.example.MissionLeaderServer - Mission Leader Server started on port 4444
+2026-01-05 17:43:14 [main] INFO  org.example.ClientDroneThread - Drone DR-10 try to register in localhost/127.0.0.1
+2026-01-05 17:43:14 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a REGISTER command
+2026-01-05 17:43:14 [main] INFO  org.example.ClientDroneThread - Drone DR-10 RECIVE OK localhost/127.0.0.1
+2026-01-05 17:43:14 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a REQUEST_TASK command
+2026-01-05 17:43:14 [Thread-1] INFO  org.example.DroneManager - Drone DR-10 got assigned to task TS-5 and set task TS-5 to IN_PROGRESS
+2026-01-05 17:43:14 [main] INFO  org.example.ClientDroneThread - Start scanning 31.9626 , 35.9119  total wait time : 0
+2026-01-05 17:43:14 [main] INFO  org.example.ClientDroneThread - drone is trying to submit TS-5
+2026-01-05 17:43:14 [Thread-0] WARN  org.example.MissionLeaderServer - Result from unregistered drone TS-5
+2026-01-05 17:43:14 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a REQUEST_TASK command
+2026-01-05 17:43:14 [Thread-1] INFO  org.example.DroneManager - Drone DR-10 got assigned to task TS-4 and set task TS-4 to IN_PROGRESS
+2026-01-05 17:43:14 [main] INFO  org.example.ClientDroneThread - Start scanning 31.9626 , 35.9108  total wait time : 0
+2026-01-05 17:43:14 [main] INFO  org.example.ClientDroneThread - drone is trying to submit TS-4
+2026-01-05 17:43:14 [Thread-0] WARN  org.example.MissionLeaderServer - Result from unregistered drone TS-4
+2026-01-05 17:43:14 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a REQUEST_TASK command
+2026-01-05 17:43:14 [Thread-1] INFO  org.example.DroneManager - Drone DR-10 got assigned to task TS-3 and set task TS-3 to IN_PROGRESS
+2026-01-05 17:43:14 [main] INFO  org.example.ClientDroneThread - Start scanning 31.9626 , 35.9108  total wait time : 0
+2026-01-05 17:43:14 [main] INFO  org.example.ClientDroneThread - drone is trying to submit TS-3
+2026-01-05 17:43:14 [Thread-0] WARN  org.example.MissionLeaderServer - Result from unregistered drone TS-3
+2026-01-05 17:43:14 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a REQUEST_TASK command
+2026-01-05 17:43:14 [Thread-1] INFO  org.example.DroneManager - Drone DR-10 got assigned to task TS-2 and set task TS-2 to IN_PROGRESS
+2026-01-05 17:43:14 [main] INFO  org.example.ClientDroneThread - Start scanning 31.9626 , 35.91025  total wait time : 0
+2026-01-05 17:43:14 [main] INFO  org.example.ClientDroneThread - drone is trying to submit TS-2
+2026-01-05 17:43:14 [Thread-0] WARN  org.example.MissionLeaderServer - Result from unregistered drone TS-2
+2026-01-05 17:43:14 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a REQUEST_TASK command
+2026-01-05 17:43:14 [Thread-1] INFO  org.example.DroneManager - Drone DR-10 got assigned to task TS-1 and set task TS-1 to IN_PROGRESS
+2026-01-05 17:43:14 [main] INFO  org.example.ClientDroneThread - Start scanning 31.9626 , 35.9097  total wait time : 0
+2026-01-05 17:43:14 [main] INFO  org.example.ClientDroneThread - drone is trying to submit TS-1
+2026-01-05 17:43:14 [Thread-0] WARN  org.example.MissionLeaderServer - Result from unregistered drone TS-1
+2026-01-05 17:43:14 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a REQUEST_TASK command
+2026-01-05 17:43:14 [Thread-1] INFO  org.example.DroneManager - No pending tasks available for drone DR-10
+2026-01-05 17:51:51 [Thread-0] INFO  org.example.MissionLeaderServer - Mission Leader Server started on port 4444
+2026-01-05 17:52:02 [main] INFO  org.example.ClientDroneThread - Drone DR-10 try to register in localhost/127.0.0.1
+2026-01-05 17:52:02 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a REGISTER command
+2026-01-05 17:52:02 [main] INFO  org.example.ClientDroneThread - Drone DR-10 RECIVE OK localhost/127.0.0.1
+2026-01-05 17:52:02 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a REQUEST_TASK command
+2026-01-05 17:52:02 [Thread-1] INFO  org.example.DroneManager - Drone DR-10 got assigned to task TS-5 and set task TS-5 to IN_PROGRESS
+2026-01-05 17:52:02 [main] INFO  org.example.ClientDroneThread - Start scanning 31.9626 , 35.9119  total wait time : 0
+2026-01-05 17:53:42 [main] INFO  org.example.ClientDroneThread - drone is trying to submit TS-5
+2026-01-05 17:53:42 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a SUBMIT_RESULT command
+2026-01-05 17:53:42 [Thread-1] INFO  org.example.DroneManager - Drone DR-10 complete task DR-10 with result of 28
+2026-01-05 17:53:42 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a REQUEST_TASK command
+2026-01-05 17:53:42 [Thread-1] INFO  org.example.DroneManager - Drone DR-10 got assigned to task TS-4 and set task TS-4 to IN_PROGRESS
+2026-01-05 17:53:42 [main] INFO  org.example.ClientDroneThread - Start scanning 31.9626 , 35.9108  total wait time : 0
+2026-01-05 17:54:20 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-11 send a REGISTER command
+2026-01-05 17:54:20 [main] INFO  org.example.ClientDroneThread - Drone DR-11 try to register in localhost/127.0.0.1
+2026-01-05 17:54:20 [main] INFO  org.example.ClientDroneThread - Drone DR-11 RECIVE OK localhost/127.0.0.1
+2026-01-05 17:54:20 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-11 send a REQUEST_TASK command
+2026-01-05 17:54:20 [Thread-2] INFO  org.example.DroneManager - Drone DR-11 got assigned to task TS-3 and set task TS-3 to IN_PROGRESS
+2026-01-05 17:54:20 [main] INFO  org.example.ClientDroneThread - Start scanning 31.9626 , 35.9108  total wait time : 0
+2026-01-05 17:55:22 [main] INFO  org.example.ClientDroneThread - drone is trying to submit TS-4
+2026-01-05 17:55:22 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a SUBMIT_RESULT command
+2026-01-05 17:55:22 [Thread-1] INFO  org.example.DroneManager - Drone DR-10 complete task DR-10 with result of 16
+2026-01-05 17:55:22 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a REQUEST_TASK command
+2026-01-05 17:55:22 [Thread-1] INFO  org.example.DroneManager - Drone DR-10 got assigned to task TS-2 and set task TS-2 to IN_PROGRESS
+2026-01-05 17:55:22 [main] INFO  org.example.ClientDroneThread - Start scanning 31.9626 , 35.91025  total wait time : 0
+2026-01-05 17:56:00 [main] INFO  org.example.ClientDroneThread - drone is trying to submit TS-3
+2026-01-05 17:56:00 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-11 send a SUBMIT_RESULT command
+2026-01-05 17:56:00 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-11 send a REQUEST_TASK command
+2026-01-05 17:56:00 [Thread-2] INFO  org.example.DroneManager - Drone DR-11 complete task DR-11 with result of 17
+2026-01-05 17:56:00 [Thread-2] INFO  org.example.DroneManager - Drone DR-11 got assigned to task TS-1 and set task TS-1 to IN_PROGRESS
+2026-01-05 17:56:00 [main] INFO  org.example.ClientDroneThread - Start scanning 31.9626 , 35.9097  total wait time : 0
+2026-01-05 17:57:02 [main] INFO  org.example.ClientDroneThread - drone is trying to submit TS-2
+2026-01-05 17:57:02 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a SUBMIT_RESULT command
+2026-01-05 17:57:02 [Thread-1] INFO  org.example.DroneManager - Drone DR-10 complete task DR-10 with result of 5
+2026-01-05 17:57:02 [Thread-0] INFO  org.example.MissionLeaderServer - Drone DR-10 send a REQUEST_TASK command
+2026-01-05 17:57:02 [Thread-1] INFO  org.example.DroneManager - No pending tasks available for drone DR-10
