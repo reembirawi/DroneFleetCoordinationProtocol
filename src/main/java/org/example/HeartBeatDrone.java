@@ -1,7 +1,6 @@
 package org.example;
 
 import org.example.util.Data;
-import org.example.util.GeoLocation;
 import org.example.util.ObjectConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -13,12 +13,10 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.util.Properties;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 
-import static java.lang.Math.abs;
 import static org.example.Constants.DronesConstants.*;
 import static org.example.config.AppConfig.getInt;
 import static org.example.config.ConfigKeys.*;
@@ -26,7 +24,6 @@ import static org.example.config.ConfigKeys.*;
 public class ClientDroneThread extends Thread {
 
     private static final Logger logger = LoggerFactory.getLogger(ClientDroneThread.class);
-    Properties properties = new Properties();
     private final ObjectConverter objectConverter = new ObjectConverter();
     private final SendPacket sendPacket = new SendPacket();
     private final String id;

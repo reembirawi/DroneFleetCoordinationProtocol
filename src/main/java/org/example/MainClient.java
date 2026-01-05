@@ -2,19 +2,13 @@ package org.example;
 
 import org.example.util.GeoLocation;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.*;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static org.example.Constants.DronesConstants.ALIVE;
-import static org.example.Constants.TaskConstants.PENDING;
-import static org.example.MainServer.socket;
 import static org.example.config.AppConfig.getInt;
 import static org.example.config.ConfigKeys.SERVER_PORT;
 
