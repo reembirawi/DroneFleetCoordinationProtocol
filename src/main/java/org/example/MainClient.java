@@ -51,8 +51,8 @@ public class MainClient {
 
         Map<String,GeoLocation> idToGeoLocation = new HashMap<>();
         idToGeoLocation.put("DR-10",geoLocation1);
-        idToGeoLocation.put("MQ-90",geoLocation2);
-        idToGeoLocation.put("RQ-40",geoLocation3);
+        idToGeoLocation.put("DR-13",geoLocation2);
+        idToGeoLocation.put("DR-14",geoLocation3);
         idToGeoLocation.put("DR-11",geoLocation4);
         idToGeoLocation.put("DR-12",geoLocation5);
 

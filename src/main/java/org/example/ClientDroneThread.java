@@ -62,7 +62,8 @@ public class ClientDroneThread extends Thread {
             sendPacket.sendData(sendData,destination,destinationPort,skt);
             logger.info("Drone {} try to register in {}", id, destination);
 
-            //Receive ok
+            //Receive
+            skt.setSoTimeout(5000);
             DatagramPacket receiveData = new DatagramPacket(reply, reply.length);
             skt.receive(receiveData);
             logger.info("Drone {} RECEIVE OK {}", id, destination);
