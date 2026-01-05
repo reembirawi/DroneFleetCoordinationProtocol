@@ -1,12 +1,12 @@
 package org.example;
 
 import org.example.util.Data;
+import org.example.util.SendPacket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.example.util.GeoLocation;
 import org.example.util.ObjectConverter;
-import org.example.Main;
 
 
 import java.io.IOException;
@@ -15,11 +15,11 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.Properties;
 import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 import static java.lang.Math.abs;
 import static org.example.Constants.DronesConstants.*;
-import static org.example.Main.tasks;
 import static org.example.config.AppConfig.getInt;
 import static org.example.config.ConfigKeys.*;
 
@@ -27,8 +27,8 @@ public class ClientDroneThread extends Thread {
 
     private static final Logger logger = LoggerFactory.getLogger(ClientDroneThread.class);
     Properties properties = new Properties();
-    ObjectConverter objectConverter = new ObjectConverter();
-
+    private final ObjectConverter objectConverter = new ObjectConverter();
+    private final SendPacket sendPacket = new SendPacket();
     private final String id;
     private final Integer speed = getInt(DRONE_SPEED);
     private final Integer maxSurvivors = getInt(MAX_NUMBER_OF_SURVIVORS);
@@ -38,16 +38,18 @@ public class ClientDroneThread extends Thread {
     private GeoLocation currentLocation;
     private Data sendData;
     private Data recivedData;
+    private ConcurrentHashMap<String, GeoLocation> tasks;
     private String status = AVAILABLE;
 
 
     public ClientDroneThread(String Id, int localPort, String destination,
-                             int destinationPort, GeoLocation currentLocation, DatagramSocket skt)throws IOException {
+                             int destinationPort, GeoLocation currentLocation, DatagramSocket skt, ConcurrentHashMap<String, GeoLocation> tasks)throws IOException {
         this.destinationPort = destinationPort;
         this.destination = InetAddress.getByName(destination);
         this.id = Id;
         this.skt = skt;
         this.currentLocation = currentLocation;
+        this.tasks = tasks;
     }
 
     public void run() {
@@ -56,10 +58,9 @@ public class ClientDroneThread extends Thread {
             HeartBeatDrone heartBeat = new HeartBeatDrone(id, destinationPort,destination,skt);
             byte[] reply = new byte[1024];
 
-            DatagramPacket sendPacket;
             //Drone register on the server (leader mission)
             sendData = new Data(REGISTER,id);
-            sendData(sendData,destination,destinationPort);
+            sendPacket.sendData(sendData,destination,destinationPort,skt);
             logger.info("Drone {} try to register in {}", id, destination);
 
             //Receive ok
@@ -71,7 +72,7 @@ public class ClientDroneThread extends Thread {
             while(receivedReplay.equals(OK) && status.equals(AVAILABLE)){
                 //send request
                 sendData = new Data(REQUEST_TASK,id);
-                sendData(sendData, destination, destinationPort);
+                sendPacket.sendData(sendData, destination, destinationPort,skt);
 
                 //receive GeoLocation
                 DatagramPacket receivePacket = new DatagramPacket(reply, reply.length);
@@ -105,6 +106,7 @@ public class ClientDroneThread extends Thread {
     //This function just to simulate scanning time
     private int scanningArea(GeoLocation destinationLocation) throws InterruptedException {
 
+
         double currentLatitude = currentLocation.getLatitude();
         double currentLongitude = currentLocation.getLongitude();
         double destinationLatitude = destinationLocation.getLatitude();
@@ -124,16 +126,6 @@ public class ClientDroneThread extends Thread {
         return r.nextInt(maxSurvivors) + 1;
     }
 
-    private void sendData(Data sendData, InetAddress destination, int port){
-        try {
-            byte [] sendBytes = objectConverter.objectToBytes(sendData);
-            DatagramPacket sendPacket = new DatagramPacket(sendBytes, sendBytes.length, destination , port);
-            skt.send(sendPacket);
-        }
-        catch (IOException e){
-            logger.error("Cant send data to : {} , port {} ",destination, port);
-        }
-    }
 
     private void processGeoLocation(Data processData) throws InterruptedException {
 
@@ -142,7 +134,7 @@ public class ClientDroneThread extends Thread {
         String numberOfSurvivors = String.valueOf(scanningArea(geoLocationReply));
 
         sendData = new Data(SUBMIT_RESULT,taskId,numberOfSurvivors);
-        sendData(sendData,destination, destinationPort);
+        sendPacket.sendData(sendData,destination, destinationPort,skt);
     }
 
 }
