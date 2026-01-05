@@ -35,7 +35,7 @@ public class MainClient {
 
     public static void main(String[] args) {
 
-        GeoLocation geoLocation1 = new GeoLocation(31.962600, 36.912450);
+        GeoLocation geoLocation1 = new GeoLocation(31.962600, 35.912450);
         GeoLocation geoLocation2 = new GeoLocation(31.962600, 35.913000);
         GeoLocation geoLocation3 = new GeoLocation(31.962600, 35.913550);
         GeoLocation geoLocation4 = new GeoLocation(31.962600, 35.914100);

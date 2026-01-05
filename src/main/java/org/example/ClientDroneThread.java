@@ -107,11 +107,14 @@ public class ClientDroneThread extends Thread {
         double currentLongitude = currentLocation.getLongitude();
         double destinationLatitude = destinationLocation.getLatitude();
         double destinationLongitude = destinationLocation.getLongitude();
-        long distance = (long) Math.sqrt((Math.pow((destinationLatitude -  currentLatitude),2) + Math.pow((destinationLongitude - currentLongitude),2)));
-        long timeToScan = distance / speed * 1000;
+        double distanceInDegrees = Math.sqrt((Math.pow((destinationLatitude -  currentLatitude),2) + Math.pow((destinationLongitude - currentLongitude),2)));
+        double distanceInKm = distanceInDegrees * 111.0;
+        double timeToScan = (distanceInKm / speed) * 3600 * 1000;
+        double timeInSec = timeToScan/1000;
 
-        logger.info("Start scanning {} , {} , task id: {}  total wait time : {}",destinationLatitude, destinationLongitude,taskId,timeToScan);
-        Thread.sleep(timeToScan);
+
+        logger.info("Start scanning {} , {} , task id: {}  total wait time : {} in sec, and {} in min",destinationLatitude, destinationLongitude,taskId,timeInSec,timeInSec/60);
+        Thread.sleep((long)timeToScan);
         currentLocation = destinationLocation;
         return numberOfSurvivors();
 
