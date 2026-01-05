@@ -5,9 +5,7 @@ import org.example.util.GeoLocation;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.DatagramSocket;
-import java.net.ServerSocket;
-import java.net.SocketException;
+import java.net.*;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -21,14 +19,23 @@ import static org.example.config.AppConfig.getInt;
 import static org.example.config.ConfigKeys.SERVER_PORT;
 
 public class MainClient {
-    private static ConcurrentHashMap<String, GeoLocation> tasks = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, GeoLocation> tasks = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, String> droneState;
     private static ConcurrentHashMap<String, String> taskStatus;
     private final static Integer serverPort = getInt(SERVER_PORT);
+    private final static InetAddress ip;
+
+    static {
+        try {
+            ip = InetAddress.getByName("localhost");
+        } catch (UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public static void main(String[] args) {
 
-        GeoLocation geoLocation1 = new GeoLocation(31.962600, 35.912450);
+        GeoLocation geoLocation1 = new GeoLocation(31.962600, 36.912450);
         GeoLocation geoLocation2 = new GeoLocation(31.962600, 35.913000);
         GeoLocation geoLocation3 = new GeoLocation(31.962600, 35.913550);
         GeoLocation geoLocation4 = new GeoLocation(31.962600, 35.914100);
@@ -51,12 +58,14 @@ public class MainClient {
 
 
         try {
+
+            System.out.println("Enter drone id");
             Scanner scan = new Scanner(System.in);
             String droneId = scan.nextLine();
 
             DatagramSocket skt = new DatagramSocket();
-            ClientDroneThread clientDroneThread = new ClientDroneThread(droneId,"192.168.100.97" ,serverPort,idToGeoLocation.get(droneId),skt,tasks);
-
+            ClientDroneThread clientDroneThread = new ClientDroneThread(droneId,ip ,serverPort,idToGeoLocation.get(droneId),skt,tasks);
+            clientDroneThread.run();
         } catch (SocketException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {

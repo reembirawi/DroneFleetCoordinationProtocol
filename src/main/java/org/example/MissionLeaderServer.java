@@ -45,7 +45,7 @@ public class MissionLeaderServer extends Thread {
 
         while (!socket.isClosed()) {
             try {
-                byte[] buffer = new byte[100];
+                byte[] buffer = new byte[1024];
                 DatagramPacket receivePacket = new DatagramPacket(buffer, buffer.length);
                 socket.receive(receivePacket);
 

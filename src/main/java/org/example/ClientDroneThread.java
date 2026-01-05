@@ -38,14 +38,14 @@ public class ClientDroneThread extends Thread {
     private GeoLocation currentLocation;
     private Data sendData;
     private Data recivedData;
-    private ConcurrentHashMap<String, GeoLocation> tasks;
+    private final ConcurrentHashMap<String, GeoLocation> tasks;
     private String status = AVAILABLE;
 
 
-    public ClientDroneThread(String Id, String destination,
+    public ClientDroneThread(String Id, InetAddress destination,
                              int destinationPort, GeoLocation currentLocation, DatagramSocket skt, ConcurrentHashMap<String, GeoLocation> tasks)throws IOException {
         this.destinationPort = destinationPort;
-        this.destination = InetAddress.getByName(destination);
+        this.destination = destination;
         this.id = Id;
         this.skt = skt;
         this.currentLocation = currentLocation;
@@ -56,6 +56,7 @@ public class ClientDroneThread extends Thread {
         try {
 
             HeartBeatDrone heartBeat = new HeartBeatDrone(id, destinationPort,destination,skt);
+            heartBeat.start();
             byte[] reply = new byte[1024];
 
             //Drone register on the server (leader mission)
@@ -66,10 +67,11 @@ public class ClientDroneThread extends Thread {
             //Receive ok
             DatagramPacket receiveData = new DatagramPacket(reply, reply.length);
             skt.receive(receiveData);
+            logger.info("Drone {} RECIVE OK {}", id, destination);
             String receivedReplay = new String(receiveData.getData(),receiveData.getOffset(),receiveData.getLength());
 
 
-            while(receivedReplay.equals(OK) && status.equals(AVAILABLE)){
+            while(status.equals(AVAILABLE)){
                 //send request
                 sendData = new Data(REQUEST_TASK,id);
                 sendPacket.sendData(sendData, destination, destinationPort,skt);
@@ -80,17 +82,13 @@ public class ClientDroneThread extends Thread {
 
                 Data processData = (Data) objectConverter.byteToObject(receivePacket.getData());
 
-                switch (processData.getType()){
-                    case SUBMIT_RESULT -> {
-                        status = OCCUPIED;
-                        processGeoLocation(processData);
-                    }
-                    case NO_TASK_AVAILABLE -> {
-                        Thread.sleep(100);
+                if(processData.getType().equals(NO_TASK_AVAILABLE)){
+                        Thread.sleep(100000);
                         continue;
-                    }
                 }
 
+                status = OCCUPIED;
+                processGeoLocation(processData);
                 status = AVAILABLE;
             }
 
@@ -133,6 +131,7 @@ public class ClientDroneThread extends Thread {
         GeoLocation geoLocationReply = tasks.get(taskId);
         String numberOfSurvivors = String.valueOf(scanningArea(geoLocationReply));
 
+        logger.info("drone is trying to submit {}",taskId);
         sendData = new Data(SUBMIT_RESULT,taskId,numberOfSurvivors);
         sendPacket.sendData(sendData,destination, destinationPort,skt);
     }
