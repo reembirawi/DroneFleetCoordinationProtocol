@@ -8,8 +8,6 @@ import org.example.util.SendPacket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 import java.time.Duration;
@@ -40,6 +38,7 @@ public class DroneManager extends Thread {
     private static final ObjectConverter objectConverter = new ObjectConverter();
     private final Consumer<String> unregisterCallback;
     private final SendPacket sendPacket = new SendPacket();
+    private String assignedTask = null;
 
 
 
@@ -86,6 +85,10 @@ public class DroneManager extends Thread {
                 if (diffSeconds > HEARTBEAT_TIMEOUT_SECONDS) {
                     droneState.put(droneId, LOST);
                     logger.warn("Drone {} get {}", droneId, LOST);
+                    if(assignedTask != null) {
+                        taskStatus.put(assignedTask, PENDING);
+                        logger.warn("Task {} set to {} because Drone {} get {}", assignedTask, PENDING, droneId, LOST);
+                    }
                     unregisterCallback.accept(droneId);
                     shutdown();
                     return;
@@ -131,6 +134,7 @@ public class DroneManager extends Thread {
             if(status.equals(PENDING)) {
                 data = new Data(TASK, taskId);
                 taskStatus.put(taskId, IN_PROGRESS);
+                assignedTask = taskId;
                 logger.info("Drone {} got assigned to task {} and set task {} to {}", droneId, taskId, taskId, IN_PROGRESS);
                 break;
             }
@@ -147,6 +151,7 @@ public class DroneManager extends Thread {
 
     private void routeSubmitResult(Data messageReceive) {
         taskStatus.put(messageReceive.getId(), COMPLETED);
+        assignedTask = null;
         logger.info("Drone {} complete task {} with result of {}", droneId, messageReceive.getId(), messageReceive.getContent());
     }
 
