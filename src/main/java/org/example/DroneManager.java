@@ -152,7 +152,7 @@ public class DroneManager extends Thread {
 
     private void routeHeartbeat(Data messageReceive) {
         if(messageReceive.getContent() != null){
-            String messageReceiveTime = messageReceive.getContent().split("-")[1];
+            String messageReceiveTime = messageReceive.getContent();
             lastHeartbeat = LocalTime.parse(messageReceiveTime, TIME_FORMATTER);
             logger.info("Drone {} still {}", droneId, ALIVE);
         }

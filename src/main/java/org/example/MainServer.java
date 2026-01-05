@@ -10,8 +10,6 @@ import static org.example.Constants.TaskConstants.PENDING;
 import static org.example.config.AppConfig.getInt;
 import static org.example.config.ConfigKeys.SERVER_PORT;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class MainServer {
 
     private static final ConcurrentHashMap<String, String> droneState = new ConcurrentHashMap<>();
@@ -22,12 +20,6 @@ public class MainServer {
     public static void main(String[] args) {
 
         System.out.println("Drone Fleet Coordination Protocol Project");
-/*
-        droneState.put("DR-10",ALIVE);
-        droneState.put("MQ-90",ALIVE);
-        droneState.put("RQ-40",ALIVE);
-        droneState.put("DR-11",ALIVE);
-        droneState.put("DR-12",ALIVE);*/
 
         taskStatus.put("TS-1",PENDING);
         taskStatus.put("TS-2",PENDING);

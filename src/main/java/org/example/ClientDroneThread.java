@@ -65,7 +65,7 @@ public class ClientDroneThread extends Thread {
             //Receive ok
             DatagramPacket receiveData = new DatagramPacket(reply, reply.length);
             skt.receive(receiveData);
-            logger.info("Drone {} RECIVE OK {}", id, destination);
+            logger.info("Drone {} RECEIVE OK {}", id, destination);
             String receivedReplay = new String(receiveData.getData(),receiveData.getOffset(),receiveData.getLength());
             HeartBeatDrone heartBeat = new HeartBeatDrone(id, destinationPort,destination,skt);
             heartBeat.start();
@@ -101,8 +101,7 @@ public class ClientDroneThread extends Thread {
     }
 
     //This function just to simulate scanning time
-    private int scanningArea(GeoLocation destinationLocation) throws InterruptedException {
-
+    private int scanningArea(GeoLocation destinationLocation,String taskId) throws InterruptedException {
 
         double currentLatitude = currentLocation.getLatitude();
         double currentLongitude = currentLocation.getLongitude();
@@ -111,8 +110,8 @@ public class ClientDroneThread extends Thread {
         long distance = (long) Math.sqrt((Math.pow((destinationLatitude -  currentLatitude),2) + Math.pow((destinationLongitude - currentLongitude),2)));
         long timeToScan = distance / speed * 1000;
 
-        logger.info("Start scanning {} , {}  total wait time : {}",destinationLatitude, destinationLongitude, timeToScan);
-        Thread.sleep(100000);
+        logger.info("Start scanning {} , {} , task id: {}  total wait time : {}",destinationLatitude, destinationLongitude,taskId,timeToScan);
+        Thread.sleep(timeToScan);
         currentLocation = destinationLocation;
         return numberOfSurvivors();
 
@@ -128,7 +127,7 @@ public class ClientDroneThread extends Thread {
 
         String taskId = processData.getId();
         GeoLocation geoLocationReply = tasks.get(taskId);
-        String numberOfSurvivors = String.valueOf(scanningArea(geoLocationReply));
+        String numberOfSurvivors = String.valueOf(scanningArea(geoLocationReply,taskId));
 
         logger.info("drone is trying to submit {}",taskId);
         sendData = new Data(SUBMIT_RESULT,id,numberOfSurvivors,taskId);

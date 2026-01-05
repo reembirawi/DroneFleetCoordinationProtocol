@@ -47,13 +47,16 @@ public class MissionLeaderServer extends Thread {
             try {
                 byte[] buffer = new byte[1024];
                 DatagramPacket receivePacket = new DatagramPacket(buffer, buffer.length);
+
                 socket.receive(receivePacket);
+                byte[] actualData = new byte[receivePacket.getLength()];
+                System.arraycopy(receivePacket.getData(), receivePacket.getOffset(), actualData, 0, receivePacket.getLength());
 
                 InetSocketAddress clientAddress = new InetSocketAddress(
                         receivePacket.getAddress(), receivePacket.getPort()
                 );
 
-                Data data = (Data) objectConverter.byteToObject(receivePacket.getData());
+                Data data = (Data) objectConverter.byteToObject(actualData);
                 route(data, clientAddress);
 
             } catch (SocketException e) {
