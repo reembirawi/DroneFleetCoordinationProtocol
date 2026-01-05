@@ -19,16 +19,17 @@ public class MainServer {
     private static ConcurrentHashMap<String, String> droneState;
     private static ConcurrentHashMap<String, String> taskStatus;
     private final static Integer serverPort = getInt(SERVER_PORT);
+    public static DatagramSocket socket = null;
 
     public static void main(String[] args) {
 
         System.out.println("Drone Fleet Coordination Protocol Project");
-        DatagramSocket socket = null;
+/*
         droneState.put("DR-10",ALIVE);
         droneState.put("MQ-90",ALIVE);
         droneState.put("RQ-40",ALIVE);
         droneState.put("DR-11",ALIVE);
-        droneState.put("DR-12",ALIVE);
+        droneState.put("DR-12",ALIVE);*/
 
         taskStatus.put("TS-1",PENDING);
         taskStatus.put("TS-2",PENDING);
