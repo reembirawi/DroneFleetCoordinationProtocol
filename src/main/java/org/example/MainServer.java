@@ -1,12 +1,11 @@
 package org.example;
 
-import org.example.util.GeoLocation;
+
 
 import java.net.DatagramSocket;
 import java.net.SocketException;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static org.example.Constants.DronesConstants.ALIVE;
 import static org.example.Constants.TaskConstants.PENDING;
 import static org.example.config.AppConfig.getInt;
 import static org.example.config.ConfigKeys.SERVER_PORT;
@@ -15,9 +14,8 @@ import static org.example.config.ConfigKeys.SERVER_PORT;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class MainServer {
 
-    private ConcurrentHashMap<String, GeoLocation> tasks = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<String, String> droneState;
-    private static ConcurrentHashMap<String, String> taskStatus;
+    private static final ConcurrentHashMap<String, String> droneState = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, String> taskStatus = new ConcurrentHashMap<>();
     private final static Integer serverPort = getInt(SERVER_PORT);
     public static DatagramSocket socket = null;
 
