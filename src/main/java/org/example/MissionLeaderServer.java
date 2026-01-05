@@ -6,6 +6,7 @@ import org.example.DroneManager;
 import org.example.util.Data;
 import org.example.util.GeoLocation;
 import org.example.util.ObjectConverter;
+import org.example.util.SendPacket;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +27,8 @@ public class MissionLeaderServer extends Thread {
     private ConcurrentHashMap<String, String> taskStatus;
     private static final Logger logger = LoggerFactory.getLogger(MissionLeaderServer.class);
     private final static ConcurrentHashMap<String, DroneManager> droneThreads = new ConcurrentHashMap<>();
+    private final SendPacket sendPacket = new SendPacket();
+
 
     MissionLeaderServer(
             DatagramSocket socket,
@@ -74,7 +77,7 @@ public class MissionLeaderServer extends Thread {
 
     private void routeRegister(Data data, InetSocketAddress clientAddress) throws IOException{
         String droneId = data.getId();
-        if (droneId == null || droneId.length() != 10) {
+        if (droneId == null || droneId.length() != 5) {
             logger.error("Invalid droneId: {}", droneId);
             return;
         }
@@ -92,11 +95,7 @@ public class MissionLeaderServer extends Thread {
             );
             droneThreads.put(droneId, manager);
             Data ack = new Data(OK);
-            byte []buffer = objectConverter.objectToBytes(ack);
-            DatagramPacket packet = new DatagramPacket(
-                    buffer, buffer.length, clientAddress.getAddress(), clientAddress.getPort()
-            );
-            socket.send(packet);
+            sendPacket.sendData(ack,clientAddress.getAddress(),clientAddress.getPort(),socket);
             manager.start();
         } else {
             logger.warn("Drone {} tried to register again", droneId);

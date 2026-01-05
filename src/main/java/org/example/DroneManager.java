@@ -4,6 +4,7 @@ import org.example.config.AppConfig;
 import org.example.config.ConfigKeys;
 import org.example.util.Data;
 import org.example.util.ObjectConverter;
+import org.example.util.SendPacket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,6 +39,7 @@ public class DroneManager extends Thread {
     private volatile boolean running = true;
     private static final ObjectConverter objectConverter = new ObjectConverter();
     private final Consumer<String> unregisterCallback;
+    private final SendPacket sendPacket = new SendPacket();
 
 
 
@@ -122,34 +124,25 @@ public class DroneManager extends Thread {
     }
 
     private void routeRequestTask() {
-        try{
-            byte []buffer = null;
-            Data data = null;
-            for (Map.Entry<String, String> task : taskStatus.entrySet()) {
-                String taskId = task.getKey();
-                String status = task.getValue();
-                if(status.equals(PENDING)) {
-                    data = new Data(TASK, taskId);
-                    taskStatus.put(taskId, IN_PROGRESS);
-                    logger.info("Drone {} got assigned to task {} and set task {} to {}", droneId, taskId, taskId, IN_PROGRESS);
-                    break;
-                }
+        Data data = null;
+        for (Map.Entry<String, String> task : taskStatus.entrySet()) {
+            String taskId = task.getKey();
+            String status = task.getValue();
+            if(status.equals(PENDING)) {
+                data = new Data(TASK, taskId);
+                taskStatus.put(taskId, IN_PROGRESS);
+                logger.info("Drone {} got assigned to task {} and set task {} to {}", droneId, taskId, taskId, IN_PROGRESS);
+                break;
             }
-
-            if(data == null) {
-                logger.info("No pending tasks available for drone {}", droneId);
-                data = new Data(NO_TASK_AVAILABLE);
-            }
-
-            buffer = objectConverter.objectToBytes(data);
-            DatagramPacket packet = new DatagramPacket(
-                    buffer, buffer.length, clientAddress.getAddress(), clientAddress.getPort()
-            );
-            socket.send(packet);
-
-        } catch(IOException e) {
-            logger.error("IOException while sending task to drone: {}", droneId);
         }
+
+        if(data == null) {
+            logger.info("No pending tasks available for drone {}", droneId);
+            data = new Data(NO_TASK_AVAILABLE);
+        }
+
+        sendPacket.sendData(data,clientAddress.getAddress(),clientAddress.getPort(),socket);
+
     }
 
     private void routeSubmitResult(Data messageReceive) {
