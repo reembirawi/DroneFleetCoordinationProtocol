@@ -14,6 +14,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 import java.net.SocketException;
+import java.util.LinkedList;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static org.example.Constants.DronesConstants.*;
@@ -26,16 +27,18 @@ public class MissionLeaderServer extends Thread {
     private static final Logger logger = LoggerFactory.getLogger(MissionLeaderServer.class);
     private final static ConcurrentHashMap<String, DroneManager> droneThreads = new ConcurrentHashMap<>();
     private final SendPacket sendPacket = new SendPacket();
-
+    private static LinkedList<String> acceptableDrones;
 
     MissionLeaderServer(
             DatagramSocket socket,
             ConcurrentHashMap<String, String> droneState,
-            ConcurrentHashMap<String, String> taskStatus
+            ConcurrentHashMap<String, String> taskStatus,
+            LinkedList<String> acceptableDrones
     ) {
         this.socket = socket;
         this.droneState = droneState;
         this.taskStatus = taskStatus;
+        this.acceptableDrones = acceptableDrones;
     }
 
     @Override
@@ -78,7 +81,7 @@ public class MissionLeaderServer extends Thread {
 
     private void routeRegister(Data data, InetSocketAddress clientAddress) throws IOException{
         String droneId = data.getId();
-        if (droneId == null || droneId.length() != 5) {
+        if (!acceptableDrones.contains(droneId) || droneId == null || droneId.length() != 5) {
             logger.error("Invalid droneId: {}", droneId);
             return;
         }
