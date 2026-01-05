@@ -42,7 +42,7 @@ public class ClientDroneThread extends Thread {
     private String status = AVAILABLE;
 
 
-    public ClientDroneThread(String Id, int localPort, String destination,
+    public ClientDroneThread(String Id, String destination,
                              int destinationPort, GeoLocation currentLocation, DatagramSocket skt, ConcurrentHashMap<String, GeoLocation> tasks)throws IOException {
         this.destinationPort = destinationPort;
         this.destination = InetAddress.getByName(destination);
@@ -111,8 +111,8 @@ public class ClientDroneThread extends Thread {
         double currentLongitude = currentLocation.getLongitude();
         double destinationLatitude = destinationLocation.getLatitude();
         double destinationLongitude = destinationLocation.getLongitude();
-        long area = (long) (abs(destinationLatitude -  currentLatitude) * abs(destinationLongitude - currentLongitude));
-        long timeToScan = area / speed * 1000;
+        long distance = (long) Math.sqrt((Math.pow((destinationLatitude -  currentLatitude),2) + Math.pow((destinationLongitude - currentLongitude),2)));
+        long timeToScan = distance / speed * 1000;
 
         logger.info("Start scanning {} , {}  total wait time : {}",destinationLatitude, destinationLongitude, timeToScan);
         Thread.sleep(timeToScan);
