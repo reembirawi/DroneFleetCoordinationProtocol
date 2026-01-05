@@ -87,7 +87,7 @@ public class DroneManager extends Thread {
                     logger.warn("Drone {} get {}", droneId, LOST);
                     if(assignedTask != null) {
                         taskStatus.put(assignedTask, PENDING);
-                        logger.warn("Task {} set to {} because Drone {} get {}", assignedTask, PENDING, droneId, LOST);
+                        logger.warn("Task {} set to {} because Drone {} is {}", assignedTask, PENDING, droneId, LOST);
                     }
                     unregisterCallback.accept(droneId);
                     shutdown();
